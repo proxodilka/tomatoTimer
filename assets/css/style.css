@@ -1,0 +1,411 @@
+*{
+    font-family: "Arial";
+}
+
+[contenteditable=true]:empty:before{
+    content: attr(placeholder);
+    display: block;
+}
+
+div[disabled], button[disabled]{
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.undoneTasksRoot:empty:after{
+    content: "Никаких задач не запланированно...";
+    font-size: 150%;
+}
+
+.doneTasksRoot:empty:after{
+    /*content: "Здесь будут появлятся выполненные задачи...";
+    font-size: 150%;*/
+}
+
+button{
+    outline: none;
+    background-color: white;
+    border: 0;
+    cursor: pointer;
+    box-shadow: 0 0 5px 2px rgb(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 3px 10px; 
+    color: black;
+    transition-duration: 0.4s;
+}
+
+button:hover{
+    background-color: #616161;
+    color: white;
+}
+
+.main{
+    margin: 0 auto;
+    padding-top: 13px;
+    max-width: 1300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab{
+    margin-top: 10px;
+    border-top: solid 1px rgb(0,0,0,0.1);
+    padding: 30px 0;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.newTaskRoot{
+    width:50%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    /*border: solid 1px rgb(0,0,0,0.2);*/
+    border: solid 2px transparent;
+    box-shadow: 0 0 5px 2px rgb(0,0,0,0.1);
+    padding: 5px 10px;
+    min-height: 72.67px;
+}
+
+.pulseAnimation{
+    transition-property: border-color;
+    transition-duration: 1.5s;
+}
+
+.done{
+    background-color: #eeeeee;
+}
+
+@media (max-width:1200px){
+    .newTaskRoot{
+        flex-basis:70%;
+        width: 70%;
+    }
+}
+
+@media (min-width:1200px){
+    .newTaskRoot{
+        flex-basis:50%;
+    }
+}
+
+/* .newTaskFieldRoot{
+    min-width: 100%;
+    box-sizing: border-box;
+} */
+
+.taskField{
+    border: 0px;
+    width:100%;
+    font-size:1.2em;
+    outline: none;
+    resize: none;
+    max-height: 300px;
+    cursor: inherit;
+    height: 2.6em;
+    min-height: 2.6em;
+    overflow: hidden;
+}
+
+.undone{
+    background-color: white;
+}
+
+.ellipsis{
+    position: absolute;
+    width: 15%;
+    top: 2.3em;
+    right: 0;
+    height: 1.5em;
+    text-align: center;
+    font-weight: bold;
+}
+
+.textareaFooter{
+    border-top: solid 1px rgb(0,0,0,0.3);
+    display: flex;
+    flex-direction: row-reverse;
+    width:100%;
+    padding: 5px 4px 0px 4px;
+    align-items: center;
+    flex-wrap:wrap;
+}
+
+.undoneArea{
+    margin-bottom: 15px;
+}
+
+.textareaFooter button + button{
+    margin-right: 10px;
+}
+
+.undoneTasksRoot .newTaskRoot+.newTaskRoot, .doneTasksRoot .newTaskRoot+.newTaskRoot{
+    margin-top: 10px;
+}
+
+
+.pointer{
+    cursor: pointer;
+}
+
+.extraInfo{
+    position: absolute;
+    right: 3px;
+    bottom:3px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.extraInfo img,.textareaFooter img{
+    height: 20px;
+    transition-duration: 0.3s;
+}
+
+.extraInfo img:hover,.textareaFooter img:hover{
+    transform: scale(1.1);
+    opacity: 0.7;
+}
+
+.extraInfo img+*,.textareaFooter img+*{
+    margin-right: 5px;
+}
+
+.textareaFooter button+img{
+    margin-right: 5px;
+}
+
+.modalRoot{
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: rgb(0,0,0,0.3);
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalWindow{
+    flex-basis: 100%;
+    max-width: 500px;
+    background-color: white;
+    padding: 30px;
+    box-shadow: 0 0 5px 2px rgb(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.modalWindow div{
+    width:100%;
+}
+
+.imgRoot{
+    display: flex;
+    justify-content: center;
+}
+
+.imgRoot img{
+    height: 130px;
+}
+
+.modalHeader{
+    text-align: center;
+    font-weight: bold;
+    font-size:250%;
+}
+
+#setDefaults{
+    width:263px;
+}
+
+.closeModal{
+    flex-basis: 100%;
+}
+
+.modalButtonRow{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.settingOption{
+    position: relative;
+    width: 100%;
+}
+
+.closeModal + .closeModal{
+    margin-left: 10px;
+}
+
+.settingOption + .settingOption{
+    border-top: solid 1px rgb(0,0,0,0.2);
+    margin-top: 20px;
+    padding-top: 15px;
+}
+
+* + .modalHeader{
+    margin-top:20px;
+}
+
+* + .modalButton{
+    margin-top: 30px;
+}
+
+.modalText{
+    margin-top: 7px;
+    font-size: 106%;
+}
+
+.modalButton{
+    display: flex;
+    justify-content: center;
+}
+
+.modalFields{
+    width:100%;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.modalFields input{
+    width: 10%;
+    height: 2em;
+}
+
+.closeModal{
+    width:25%;
+}
+
+.newTaskRowRoot{
+    width:100%;
+    position: relative;
+    display:flex;
+    justify-content: center;
+}
+
+.settingsButton{
+    position: absolute;
+    left:0;
+    z-index: 1;
+    cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.settingsButton:hover{
+    transform: scale(1.09);
+    opacity: 0.6;
+}
+
+.timerRoot{
+    right:0;
+    top: -10px;
+    position: absolute;
+    width: 100px;
+    height: 106px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.timeLeft{
+    font-size: 118%;
+}
+
+@media (max-width:1200px){
+    .settingsButton{
+        position: fixed;
+        bottom: 30px;
+        left: 0;
+        transform: scale(0.8);
+    }
+
+    .main{
+        margin-bottom: 100px;
+    }
+
+    .timerRoot{
+        position: fixed;
+        bottom: 0;
+        right: -15px;
+        top:auto;
+        transform: scale(0.8);
+    }
+}
+
+.circleRoot{
+    cursor: pointer;
+    position: relative;
+    transition-duration: 0.2s;
+}
+
+.circleRoot:hover{
+    transform: scale(1.09);
+}
+
+.pause{
+    position: absolute;
+    width:100%;
+    height: 100%;
+    font-size: 250%;
+    color: white;
+    font-weight: 900;
+}
+
+.pause img{
+    width: 50px;
+    position: absolute;
+    top: 14px;
+    left: 16px;
+}
+ .modalButton button + button{
+     margin-left:5px;
+ }
+
+ .tomatCounter{
+    position: relative;
+    transition-duration: 0.2s;
+    padding: 0;
+    display: flex;
+    margin: 0;
+    align-items: center;
+ }
+
+ .tomatCounter:hover{
+     transform: scale(1.1);
+     opacity: 0.8;
+ }
+
+ img .tomat:hover{
+     transform: scale(1);
+     opacity: 1;
+ }
+
+ .tomatoAmount{
+    color: white;
+    position: absolute;
+    /* right: 0; */
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 2px;
+ }
+
+ .confirm{
+     position: relative;
+ }
+
+ .confirm button{
+     position: absolute;
+ }
+
+ .modalHeader + .modalButtonRow{
+     margin-top: 10px;
+ }

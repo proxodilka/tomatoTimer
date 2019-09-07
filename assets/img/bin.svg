@@ -1,0 +1,13 @@
+<svg width="23.999999999999996" height="23.999999999999996" xmlns="http://www.w3.org/2000/svg">
+ <title/>
+ <desc/>
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path id="editor-trash-delete-recycle-bin-glyph" fill="#515151" d="m3.0012,2c0,0 -0.5012,0 -0.5012,1c0,1 0.5012,1 0.5012,1l17.9976,0c0,0 0.5012,0 0.5012,-1c0,-1 -0.5012,-1 -0.5012,-1l-17.9976,0l0,0zm0.47255,3l17,0l-2,18l-13,0l-2,-18zm7,-4c-1,0 -1,1 -1,1l5,0c0,0 0,-1 -1,-1l-3,0l0,0zm-2,20l1,0l-1,-16.03711l-1,0l1,16.03711zm7,-16.03711l-1,16.03711l1,0l1,-16.03711l-1,0l0,0zm-4,0l0,16.03711l1,0l0,-16.03711l-1,0l0,0z"/>
+ </g>
+</svg>

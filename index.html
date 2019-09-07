@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Нет активных задач</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/error.css">
+    <link rel="stylesheet" href="assets/css/progressRing.css">
+    <link rel="stylesheet" href="assets/css/timingfield.css">
+    <link rel="shortcut icon" href="assets/img/tomat.png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="assets/js/timingfield.js"></script>
+    <script src="assets/js/modalWindows.js"></script>
+    <script src="assets/js/progressRing.js"></script>
+    <script src="assets/js/drawErrors.js"></script>
+    <script src="assets/js/pulse.js"></script>
+    <script src="assets/js/autoResize.js"></script>
+    <script src="assets/js/tomat.js"></script>
+    <script src="assets/js/main.js"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="newTaskRowRoot">
+            <div class="settingsButton">
+                <img src="assets/img/settings.svg" alt="">
+            </div>
+            <div class="newTaskRoot">
+                    <div spellcheck="false" contenteditable="true" id="newTaskField" class="autoResize taskField" placeholder="Введите задачу..."></div>
+                    <div class="textareaFooter">
+                        <button class="addTask">Сохранить</button>
+                        <button class="clearTask">Очистить</button>
+                    </div>
+            </div>
+            <div class="timerRoot">
+                <div class="circleRoot">
+                    <div class="pause"><img src="assets/img/play.png" alt=""></div>
+                    <svg
+                    class="progress-ring"
+                    width="80"
+                    height="80">
+                    <circle
+                        class="progress-ring__circle"
+                        stroke="#43a047"
+                        stroke-width="4"
+                        fill="red"
+                        r="37"
+                        cx="40"
+                        cy="40"/>
+                        </svg>
+                </div>
+                    <div class="timeLeft">00:00:00</div>
+            </div>
+        </div>
+        
+        
+        
+        
+        <div class="undoneTasksRoot tab"></div>
+
+        <div class="doneTasksRoot tab"></div>
+    </div>
+    
+</body>
+</html>
