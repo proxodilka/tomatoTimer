@@ -89,7 +89,7 @@ button:hover{
 
 @media (min-width:1200px){
     .newTaskRoot{
-        flex-basis:50%;
+        /*flex-basis:50%;*/
     }
 }
 
