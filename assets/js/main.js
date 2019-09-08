@@ -1,4 +1,4 @@
-var TASKS = [];
+var TASKS = {};
 var onTask=false;
 var defaultLength = 1000*60*5;
 const userSettings = {
@@ -22,24 +22,20 @@ function getField(x){
 
 function clearTask(){
     $(getField(this)).html("");
-    let minHeight = $(this).css("min-height");
-    $(getField(this)).css({
-        height: "2.6em",
-        overflowY: "hidden"
-    })
+    trackFieldHeight.call(getField(this));
 }
 
 function clearTasks(option){
     $('.doneTasksRoot .newTaskRoot').remove();
     if (option=="done")
-        for(i=0; i<TASKS.length; i++){
-            if (TASKS[i].done)
-                TASKS.splice(i,1);
+        for(let x in TASKS){
+            if (TASKS[x].done)
+                delete TASKS[x];
         }
 
     if (option!="done"){
         $('.undoneTasksRoot .newTaskRoot').remove();
-        TASKS = [];
+        TASKS = {};
     }
         
     updateStorage();
@@ -53,14 +49,15 @@ function addTask(event, outerClick=0){
             drawBox("Нельзя создать пустую задачу","error");
         return;
     }
-    TASKS.push({
+    let newId = Date.now();
+    TASKS[newId] = {
         data: data,
         done: false,
         tomato: 0
-    });
+    };
     updateStorage();
     clearTask.call(this);
-    insertNewTask();
+    insertNewTask(newId);
 }
 
 function insertFake(){
@@ -122,16 +119,16 @@ function getJqTaskDone(i){
 }
 
 function drawTasks(){
-    for(i=0; i<TASKS.length; i++){
-        if (!TASKS[i].done)
-            getJqTask(i).hide().prependTo($('.undoneTasksRoot')).show(100, addEllipsis);
+    for(let x in TASKS){
+        if (!TASKS[x].done)
+            getJqTask(x).hide().prependTo($('.undoneTasksRoot')).show(100, addEllipsis);
         else
-            getJqTaskDone(i).hide().prependTo($('.doneTasksRoot')).show(100, addEllipsis);
+            getJqTaskDone(x).hide().prependTo($('.doneTasksRoot')).show(100, addEllipsis);
     }
 }
 
-function insertNewTask(){
-    getJqTask(TASKS.length-1).hide().prependTo($('.undoneTasksRoot')).show(100, addEllipsis);
+function insertNewTask(id){
+    getJqTask(id).hide().prependTo($('.undoneTasksRoot')).show(100, addEllipsis);
 }
 
 function insertNewDoneTask(id){
@@ -162,7 +159,9 @@ function deleteTask(){
         drawBox("Нельзя удалить активную задачу","error");
         return;
     }
-    TASKS.splice($(main).data('id'),1);
+    let id = $(main).data('id');
+    delete TASKS[id];
+    //TASKS.splice($(main).data('id'),1);
     updateStorage();
 
     $(main).hide(200, function(){$(this).remove()});
@@ -181,6 +180,7 @@ function hideExtras(duration=200){
 }
 
 function trackFieldHeight(){
+    console.log('tracking');
     if (this.clientHeight>=parseInt($(this).css("max-height"))){
         if ($(this).css("overflow-y")!="scroll");
             $(this).css("overflow-y","scroll");
@@ -197,14 +197,14 @@ function openEditor(e){
         || $(this).hasClass('activeField') 
         || $(e.target).parents('.extraInfo').length!=0)
         return;
-    //console.log('openEditor');
+    console.log('openEditor');
     tryhideInfo();
     isEditorOpen++;
     //console.log(isEditorOpen);
     $(this).find('.ellipsis').hide();
     let field = $(this).find('.taskField')[0];
     $(field).css("height","auto");
-    $(field).on('input', trackFieldHeight);
+    $(field).on('input change', trackFieldHeight);
     trackFieldHeight.call(field);
 
     $(this).addClass('activeField');
@@ -281,12 +281,12 @@ function updateStorage(){
 function getTasksFromLocalStorage(){
     TASKS = JSON.parse(localStorage.getItem('_tomato-app:tasks'));
     if (TASKS === null){
-        TASKS = [];
-        TASKS.push({
+        TASKS = {};
+        TASKS[Date.now()] = {
             data: tutorialText,
             done: 0,
             tomato: 0
-        });
+        };
 
         updateStorage();
     }
@@ -476,7 +476,7 @@ function clickListener(e){
             openedFields = [];
         }
     })(e);
-    //console.log(openedFields);
+    console.log(openedFields);
     if (openedFields.length==0){
         showInfo();
     }
